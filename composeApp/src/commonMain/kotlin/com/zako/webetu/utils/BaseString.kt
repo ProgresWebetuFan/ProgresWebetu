@@ -5,13 +5,10 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 
-
 sealed class BaseString {
     class DynamicString(val value: String) : BaseString()
     class ResString(val value: StringResource) : BaseString()
 }
-
-
 
 // we does not make theme the same name cause of conflict's in the signature
 
@@ -24,7 +21,6 @@ fun BaseString.asStringCompose(): String {
         is BaseString.ResString -> stringResource(this.value)
     }
 }
-
 
 suspend fun BaseString.asString(): String {
     return when (this) {

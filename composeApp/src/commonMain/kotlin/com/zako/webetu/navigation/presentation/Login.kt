@@ -13,8 +13,8 @@ fun NavGraphBuilder.loginGraph(
     composable<Login> {
         LoginScreenRoot(
             navigateToMainScreen = {
-                navHostController.navigate(AppGraph){
-                    popUpTo(Login){
+                navHostController.navigate(AppGraph) {
+                    popUpTo(Login) {
                         inclusive = true
                     }
                 }

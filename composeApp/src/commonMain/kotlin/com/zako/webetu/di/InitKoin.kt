@@ -1,6 +1,5 @@
 package com.zako.webetu.di
 
-
 import com.zako.webetu.auth.login.di.loginModule
 import com.zako.webetu.auth.user.di.userModule
 import com.zako.webetu.databaseModule
@@ -13,8 +12,8 @@ fun initKoin(config: KoinAppDeclaration? = null) {
         config?.invoke(this)
         modules(
             ktorModule,
-            databaseModule ,
-            loginModule ,
+            databaseModule,
+            loginModule,
             userModule
         )
     }

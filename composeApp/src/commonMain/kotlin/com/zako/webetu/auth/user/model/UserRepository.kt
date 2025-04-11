@@ -5,9 +5,9 @@ import com.zako.webetu.errors.AppError
 
 interface UserRepository {
     /**
-         save the user auth data to the local data source
+     save the user auth data to the local data source
      */
-    suspend fun saveUserAuth(user: UserAuth) : Either<AppError , Boolean>
+    suspend fun saveUserAuth(user: UserAuth): Either<AppError, Boolean>
 
     /**
      * get the user auth data form the local data source
@@ -15,5 +15,5 @@ interface UserRepository {
      * @return [com.zako.webetu.errors.AuthenticationErrors.NoDefaultUserException] if there is not user in the db
      *
      */
-    suspend fun getUserAuth(): Either<AppError , UserAuth>
+    suspend fun getUserAuth(): Either<AppError, UserAuth>
 }

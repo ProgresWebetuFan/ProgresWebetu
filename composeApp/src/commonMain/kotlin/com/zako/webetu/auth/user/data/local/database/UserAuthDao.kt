@@ -10,14 +10,14 @@ import com.zako.webetu.auth.user.model.UserAuth
 @Dao
 interface UserAuthDao {
 
-     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     suspend fun insertUserAuth(userAuth: UserAuth)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUserAuth(userAuth: UserAuth)
 
-     @Query("SELECT * FROM UserAuth WHERE id = :id")
-     suspend fun getUserAuthById(id: String): UserAuth?
+    @Query("SELECT * FROM UserAuth WHERE id = :id")
+    suspend fun getUserAuthById(id: String): UserAuth?
 
-     @Delete
-     suspend fun deleteUserAuth(userAuth: UserAuth)
+    @Delete
+    suspend fun deleteUserAuth(userAuth: UserAuth)
 
     /**
      * this only persist if the app keep supporting one user per device

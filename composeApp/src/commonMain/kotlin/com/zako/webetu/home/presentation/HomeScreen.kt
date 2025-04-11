@@ -7,23 +7,19 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 
-
 @Composable
 fun HomeScreenRoot(modifier: Modifier = Modifier) {
     HomeScreen(modifier)
 }
-
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
@@ -39,7 +35,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     onClick = { selectedItem = index }
                 )
             }
-        }
+        },
+        modifier = modifier
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),

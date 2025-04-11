@@ -1,13 +1,8 @@
 package com.zako.webetu
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -24,8 +19,9 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
-@Preview
-fun App() {
+fun App(
+    modifier: Modifier = Modifier
+) {
     val rootNavController = rememberNavController()
     WebetuTheme(
         darkTheme = false,
@@ -56,11 +52,18 @@ fun App() {
                     hostState = snackbarHostState
                 )
             },
-            modifier = Modifier.fillMaxSize()) { innerPadding ->
+            modifier = modifier.fillMaxSize()
+        ) { innerPadding ->
             NavigationHost(
                 modifier = Modifier.padding(innerPadding),
                 rootNavController = rootNavController
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun PreviewApp() {
+    App()
 }

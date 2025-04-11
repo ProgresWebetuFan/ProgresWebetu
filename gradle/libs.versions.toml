@@ -15,21 +15,17 @@ compose-multiplatform = "1.7.3"
 junit = "4.13.2"
 kotlin = "2.1.10"
 kotlinx-coroutines = "1.10.1"
-
 coreSplashscreen = "1.0.1"
 kotlinxSerializationJson = "1.8.0"
 uiTextGoogleFonts = "1.7.8"
 ksp = "2.1.10-1.0.31"
-room_version = "2.7.0-rc03"
+room_version = "2.7.0"
 arrow = "2.0.1"
 koin-bom = "4.0.2"
 compose_navigation = "2.8.0-alpha10"
 ktor= "3.1.1"
-sqlLiteVersion = "2.5.0-rc03"
-detekt-gradle-plugin = "1.23.8"
-
-
-
+sqlLiteVersion = "2.5.0"
+detekt = "1.23.8"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -47,9 +43,6 @@ androidx-lifecycle-runtime-compose = { group = "org.jetbrains.androidx.lifecycle
 kotlinx-coroutines-swing = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
-
-
-
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
@@ -58,7 +51,6 @@ navigation-compose = {module = "org.jetbrains.androidx.navigation:navigation-com
 room-runtime = {module = "androidx.room:room-runtime"  , version.ref = "room_version" }
 room-compiler  = {module = "androidx.room:room-compiler"  , version.ref = "room_version" }
 sqlite-bundled = {module = "androidx.sqlite:sqlite-bundled"  , version.ref = "sqlLiteVersion" }
-
 
 # utils
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
@@ -70,9 +62,6 @@ koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose" }
 koin-androidx-compose-navigation = { module = "io.insert-koin:koin-androidx-compose-navigation" }
-
-
-
 
 koin-compose = { module = "io.insert-koin:koin-compose" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel" }
@@ -86,6 +75,10 @@ ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
+detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+detekt-formatter = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detekt-rules-compose = { module = "io.nlopez.compose.rules:detekt", version = "0.4.10" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -96,6 +89,6 @@ kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", vers
 
 google-devtools-ksp = { id =  "com.google.devtools.ksp" , version.ref = "ksp" }
 room-gradle-plugin = { id = "androidx.room" , version.ref = "room_version"}
-detekt = {id = "io.gitlab.arturbosch.detekt" , version.ref = "detekt-gradle-plugin"}
+detekt = {id = "io.gitlab.arturbosch.detekt" , version.ref = "detekt"}
 
 

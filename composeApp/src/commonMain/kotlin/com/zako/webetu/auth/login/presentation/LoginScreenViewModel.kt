@@ -46,7 +46,7 @@ class LoginScreenViewModel(
             is LoginScreenActions.LoginClicked -> {
                 login(
                     _state.value.registrationNumber,
-                    _state.value.password ,
+                    _state.value.password,
                     action.navigateAction
                 )
             }
@@ -56,9 +56,8 @@ class LoginScreenViewModel(
     fun login(
         registrationNumber: String,
         password: String,
-        navigationAction : () -> Unit,
+        navigationAction: () -> Unit,
     ) {
-
         if (registrationNumber.isBlank() or password.isBlank()) {
             println("please fill all the fields !")
         }

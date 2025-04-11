@@ -10,13 +10,12 @@ import webetu.composeapp.generated.resources.ic_launcher_foreground
 
 fun main() {
     application {
-
         initKoin()
 
         Window(
             onCloseRequest = ::exitApplication,
             title = "Webetu Desktop",
-            icon = painterResource(Res.drawable.ic_launcher_foreground) ,
+            icon = painterResource(Res.drawable.ic_launcher_foreground),
             onKeyEvent = {
                 if (it.key == androidx.compose.ui.input.key.Key.Escape) {
                     exitApplication()
@@ -28,8 +27,5 @@ fun main() {
         ) {
             App()
         }
-
-
-
     }
 }
