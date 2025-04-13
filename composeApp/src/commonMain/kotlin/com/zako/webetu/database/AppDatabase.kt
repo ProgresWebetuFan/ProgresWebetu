@@ -8,7 +8,6 @@ import com.zako.webetu.auth.user.data.local.database.UserAuthDao
 import com.zako.webetu.auth.user.model.UserAuth
 import kotlinx.coroutines.Dispatchers
 
-
 @Database(
     entities = [
         UserAuth::class
@@ -20,7 +19,6 @@ import kotlinx.coroutines.Dispatchers
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userAuthDao(): UserAuthDao
 }
-
 
 fun RoomDatabase.Builder<AppDatabase>.getWebetuInstance(): AppDatabase {
     return this

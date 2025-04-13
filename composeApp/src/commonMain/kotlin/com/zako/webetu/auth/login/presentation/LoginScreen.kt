@@ -1,7 +1,6 @@
 package com.zako.webetu.auth.login.presentation
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -88,9 +87,11 @@ fun LoginScreenRoot(
             loginScreenViewModel.action(LoginScreenActions.HidePasswordClicked)
         },
         onLoginClick = {
-            loginScreenViewModel.action(LoginScreenActions.LoginClicked(
-                navigateAction = navigateToMainScreen
-            ))
+            loginScreenViewModel.action(
+                LoginScreenActions.LoginClicked(
+                    navigateAction = navigateToMainScreen
+                )
+            )
         }
     )
 }
@@ -105,7 +106,6 @@ private fun LoginScreen(
     onLoginClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
     val verticalState = rememberScrollState()
 
     NetworkSquaresEffect(

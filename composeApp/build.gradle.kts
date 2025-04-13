@@ -1,3 +1,4 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -10,7 +11,7 @@ plugins {
     alias(libs.plugins.room.gradle.plugin)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.detekt )
+    alias(libs.plugins.detekt)
 }
 
 room {
@@ -24,12 +25,12 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     jvm("desktop")
-    
+
     sourceSets {
         val desktopMain by getting
-        
+
         androidMain.dependencies {
 
             implementation(compose.preview)
@@ -38,16 +39,13 @@ kotlin {
             implementation(libs.androidx.ui.text.google.fonts)
             implementation(libs.androidx.core.ktx)
 
-
             // di
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.koin.androidx.compose.navigation)
 
-            //internet
+            // internet
             implementation(libs.ktor.client.okhttp)
-
-
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -61,41 +59,33 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.kotlinx.coroutines.core)
-
-
             implementation(libs.navigation.compose)
+
             // db
             implementation(libs.room.runtime)
             implementation(libs.sqlite.bundled)
 
-
-
-            //utils
+            // utils
             api(libs.arrow.core)
             implementation(libs.arrow.fx.coroutines)
             implementation(libs.kotlinx.serialization.json)
 
-            //di
+            // di
             implementation(project.dependencies.platform(libs.koin.bom))
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             implementation(libs.koin.compose.viewmodel.navigation)
 
-            //internet
+            // internet
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
-
-
-
-
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-
         }
     }
 }
@@ -125,20 +115,16 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-
-
 }
 
 dependencies {
     debugImplementation(compose.uiTooling)
     implementation(libs.kotlinx.coroutines.android)
     ksp(libs.room.compiler)
-
+    implementation(libs.detekt.gradle.plugin)
+    detektPlugins(libs.detekt.rules.compose)
+    detektPlugins(libs.detekt.formatter)
 }
-
-
-
-
 
 compose.desktop {
     application {
@@ -158,19 +144,17 @@ compose.desktop {
     }
 }
 
-
-detekt{
-
-    // compose
+detekt {
+    buildUponDefaultConfig = true
+    parallel = true
     config.setFrom((files("$rootDir/config/detekt/detekt.yml")))
 }
 
-
-
-
-
-
-
-
-
-
+tasks.withType<Detekt>().configureEach {
+    setSource(files(project.projectDir))
+    exclude("**/build/**")
+    reports {
+        html.required.set(true)
+        md.required.set(true)
+    }
+}

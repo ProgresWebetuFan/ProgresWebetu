@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
-
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
     onPrimary = onPrimaryLight,
@@ -263,7 +262,6 @@ fun WebetuTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-
         darkTheme -> darkScheme
         else -> lightScheme
     }
@@ -271,7 +269,7 @@ fun WebetuTheme(
     val typo = provideAppTypography()
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = typo ,
+        typography = typo,
         content = content
     )
 }

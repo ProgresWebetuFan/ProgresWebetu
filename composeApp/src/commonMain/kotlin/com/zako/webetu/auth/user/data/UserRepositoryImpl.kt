@@ -6,24 +6,21 @@ import arrow.core.left
 import arrow.core.right
 import com.zako.webetu.auth.user.model.UserAuth
 import com.zako.webetu.auth.user.model.UserLocalDataSource
-import com.zako.webetu.auth.user.model.UserRemoteDataSource
 import com.zako.webetu.auth.user.model.UserRepository
 import com.zako.webetu.errors.AppError
 import com.zako.webetu.errors.AuthenticationErrors
 
 class UserRepositoryImpl(
     private val localDataSource: UserLocalDataSource,
-    private val remoteDataSource: UserRemoteDataSource,
 ) : UserRepository {
-
 
     override suspend fun saveUserAuth(user: UserAuth): Either<AppError, Boolean> {
         return localDataSource.saveUserAuth(user)
     }
 
     override suspend fun getUserAuth(): Either<AppError, UserAuth> {
-        return  localDataSource.getUserAuth().flatMap { userAuth ->
-            userAuth?.right() ?: AuthenticationErrors.NoDefaultUserException(error = null  ).left()
+        return localDataSource.getUserAuth().flatMap { userAuth ->
+            userAuth?.right() ?: AuthenticationErrors.NoDefaultUserException(error = null).left()
         }
     }
 }

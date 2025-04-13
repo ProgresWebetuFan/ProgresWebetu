@@ -10,4 +10,3 @@ data object AppGraph : Destination
 
 @Serializable
 data object HomeScreen : Destination
-

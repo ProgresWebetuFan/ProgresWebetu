@@ -1,6 +1,5 @@
 package com.zako.webetu.errors
 
-
 import com.zako.webetu.utils.BaseString
 import webetu.composeapp.generated.resources.Res
 import webetu.composeapp.generated.resources.database_delete_error

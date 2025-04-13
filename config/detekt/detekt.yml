@@ -2,22 +2,27 @@ build:
     maxIssues: 0
 
 comments:
-    Active: false  # Disable documentation warnings (optional)
+    active: false  # Disable documentation warnings (optional)
 
 style:
-    ignoreAnnotated :
-        - "Composable"  # Ignore style issues in @Composable functions
-        - "Preview"  # Ignore style issues in @Preview functions
     MagicNumber:
-        ignoreAnnotated: ["Composable"]  # Ignore numbers in @Composable functions
+        active: false # It's annoying really
     UnusedPrivateMember:
-        ignoreAnnotated: ["Composable", "Preview"]  # Ignore unused parameters in Compose previews
-    FunctionOnlyReturningConstant:
-        ignoreAnnotated: ["Composable"]  # Avoid issues with Composable functions returning constants
+        ignoreAnnotated: [ "Composable", "Preview" ]  # Ignore unused parameters in Compose previews
     WildcardImport:
         active: false  # Allow wildcard imports for Compose
-
 
 formatting:
     MaximumLineLength:
         maxLineLength: 120  # Allow longer lines for better Compose readability
+
+complexity:
+    LongParameterList:
+        ignoreAnnotated: [ "Composable" ]
+        ignoreDefaultParameters: true
+    LongMethod:
+        ignoreAnnotated: [ "Composable" ]
+
+naming:
+    FunctionNaming:
+        ignoreAnnotated: [ "Composable" ]

@@ -7,26 +7,11 @@ import com.zako.webetu.auth.user.model.UserLocalDataSource
 import com.zako.webetu.auth.user.model.UserRemoteDataSource
 import com.zako.webetu.auth.user.model.UserRepository
 import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val userModule = module {
-
-    single<UserLocalDataSource> {
-        UserLocalDataSourceImpl(
-            database = get()
-        )
-    }
-
-    single<UserRemoteDataSource>{
-        UserRemoteDataSourceImpl(
-            client = get()
-        )
-    }
-
-    single<UserRepository>{
-        UserRepositoryImpl(
-            localDataSource = get(),
-            remoteDataSource = get()
-        )
-    }
+    singleOf(::UserLocalDataSourceImpl).bind(UserLocalDataSource::class)
+    singleOf(::UserRemoteDataSourceImpl).bind(UserRemoteDataSource::class)
+    singleOf(::UserRepositoryImpl).bind(UserRepository::class)
 }

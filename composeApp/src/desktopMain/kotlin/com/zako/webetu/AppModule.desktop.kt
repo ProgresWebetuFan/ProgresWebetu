@@ -10,7 +10,7 @@ import io.ktor.serialization.kotlinx.json.json
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val ktorModule  = module {
+actual val ktorModule = module {
     single<HttpClient> {
         HttpClient(CIO) {
             install(ContentNegotiation) {
