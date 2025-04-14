@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -30,14 +32,23 @@ import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -107,6 +118,8 @@ private fun LoginScreen(
     modifier: Modifier = Modifier,
 ) {
     val verticalState = rememberScrollState()
+    val registrationNumberFocusRequester = remember { FocusRequester() }
+    val passwordFocusRequester = remember { FocusRequester() }
 
     NetworkSquaresEffect(
         squaresCount = 9,
@@ -155,7 +168,24 @@ private fun LoginScreen(
                 modifier = Modifier
                     .padding(horizontal = 24.dp)
                     .heightIn(min = 48.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .focusRequester(registrationNumberFocusRequester)
+                    .onPreviewKeyEvent { event ->
+                        if (event.type == KeyEventType.KeyDown && (event.key == Key.Tab || event.key == Key.Enter)) {
+                            passwordFocusRequester.requestFocus()
+                            true
+                        } else {
+                            false
+                        }
+                    },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        passwordFocusRequester.requestFocus()
+                    }
+                ),
                 shape = MaterialTheme.shapes.medium,
                 isError = state.error.isNotBlank(),
                 supportingText = {
@@ -191,7 +221,37 @@ private fun LoginScreen(
                 modifier = Modifier
                     .padding(horizontal = 24.dp)
                     .heightIn(min = 48.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .focusRequester(passwordFocusRequester)
+                    .onPreviewKeyEvent { event ->
+                        if (event.type == KeyEventType.KeyDown) {
+                            when (event.key) {
+                                Key.Enter -> {
+                                    if (state.registrationNumber.isNotBlank() && state.password.isNotBlank()) {
+                                        onLoginClick()
+                                    }
+                                    true
+                                }
+                                Key.Tab -> {
+                                    passwordFocusRequester.freeFocus()
+                                    true
+                                }
+                                else -> false
+                            }
+                        } else {
+                            false
+                        }
+                    },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        if (state.registrationNumber.isNotBlank() && state.password.isNotBlank()) {
+                            onLoginClick()
+                        }
+                    }
+                ),
                 isError = state.error.isNotBlank(),
                 supportingText = {
                     if (state.error.isNotBlank()) {
