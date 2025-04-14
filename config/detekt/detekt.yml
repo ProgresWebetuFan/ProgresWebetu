@@ -22,6 +22,8 @@ complexity:
         ignoreDefaultParameters: true
     LongMethod:
         ignoreAnnotated: [ "Composable" ]
+    CyclomaticComplexMethod:
+        ignoreAnnotated: [ "Composable" ]
 
 naming:
     FunctionNaming:

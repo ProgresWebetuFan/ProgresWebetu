@@ -1,6 +1,7 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.compose.reload.ComposeHotRun
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -12,6 +13,7 @@ plugins {
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.kotlinx.serialization)
     alias(libs.plugins.detekt)
+    alias(libs.plugins.compose.hotreload)
 }
 
 room {
@@ -20,7 +22,6 @@ room {
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -38,6 +39,7 @@ kotlin {
             implementation(libs.androidx.core.splashscreen)
             implementation(libs.androidx.ui.text.google.fonts)
             implementation(libs.androidx.core.ktx)
+            implementation(libs.androidx.material)
 
             // di
             implementation(libs.koin.android)
@@ -52,7 +54,6 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.ui)
-            implementation(libs.androidx.material)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(compose.material3AdaptiveNavigationSuite)
@@ -157,4 +158,12 @@ tasks.withType<Detekt>().configureEach {
         html.required.set(true)
         md.required.set(true)
     }
+}
+
+composeCompiler {
+    featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+}
+
+tasks.register<ComposeHotRun>("runHot") {
+    mainClass.set("com.zako.webetu.MainKt")
 }
