@@ -8,5 +8,7 @@ import com.zako.webetu.navigation.model.MainGraph
 fun NavGraphBuilder.mainGraph(
     navHostController: NavHostController,
 ) {
-    composable<MainGraph> { MainGraphRoot() }
+    composable<MainGraph> {
+        MainGraphRoot()
+    }
 }
