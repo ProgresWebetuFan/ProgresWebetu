@@ -16,11 +16,11 @@ import com.zako.webetu.notification.snackbare.SnackbarController
 import com.zako.webetu.theme.WebetuTheme
 import com.zako.webetu.utils.ObserveAsEvents
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.ui.tooling.preview.Preview
 
 @Composable
 fun App(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier ,
+    isUserLogin : Boolean
 ) {
     val rootNavController = rememberNavController()
     WebetuTheme(
@@ -56,14 +56,9 @@ fun App(
         ) { innerPadding ->
             NavigationHost(
                 modifier = Modifier.padding(innerPadding),
+                isUserLogin = isUserLogin ,
                 rootNavController = rootNavController
             )
         }
     }
-}
-
-@Preview
-@Composable
-private fun PreviewApp() {
-    App()
 }

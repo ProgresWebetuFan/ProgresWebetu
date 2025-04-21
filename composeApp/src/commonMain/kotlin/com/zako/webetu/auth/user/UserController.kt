@@ -1,5 +1,7 @@
 package com.zako.webetu.auth.user
 
+import com.diamondedge.logging.KmLogging
+import com.diamondedge.logging.logging
 import com.zako.webetu.auth.user.model.UserAuth
 import com.zako.webetu.auth.user.model.UserRepository
 import com.zako.webetu.notification.snackbare.SnackbarController
@@ -19,11 +21,18 @@ import org.koin.core.component.get
 object UserController : KoinComponent {
 
     private val userRepository: UserRepository = get()
+    private val log = logging()
 
     suspend fun getUserAuth(): UserAuth? {
         return userRepository.getUserAuth()
             .onLeft { error ->
-                SnackbarController.simpleSnackbar(error.errorMessage?.asString() ?: "Failed to get the user ")
+                val message = error.errorMessage?.asString()
+                log.d ("UserController") {
+                    "getUserAuth : $message"
+                }
+                SnackbarController.simpleSnackbar(
+                    error.errorMessage?.asString() ?: "Failed to get the user "
+                )
             }
             .getOrNull()
     }
@@ -32,9 +41,12 @@ object UserController : KoinComponent {
         val job = userRepository
             .saveUserAuth(user)
             .onLeft {
-                SnackbarController.simpleSnackbar(it.errorMessage?.asString() ?: "Failed to save the user")
+                val message = it.errorMessage?.asString()
+                SnackbarController.simpleSnackbar(message ?: "Failed to save the user")
             }
             .getOrNull()
         return job == true
     }
+
+
 }

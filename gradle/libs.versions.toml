@@ -12,6 +12,7 @@ kotlin = "2.1.20"
 kotlinx-coroutines = "1.10.1"
 coreSplashscreen = "1.0.1"
 kotlinxSerializationJson = "1.8.0"
+logging = "2.0.3"
 uiTextGoogleFonts = "1.7.8"
 ksp = "2.1.20-2.0.0"
 room_version = "2.7.0"
@@ -21,6 +22,9 @@ compose_navigation = "2.8.0-alpha10"
 ktor= "3.1.1"
 sqlLiteVersion = "2.5.0"
 detekt = "1.23.8"
+logback = "1.5.16"
+slf4jApi = "2.0.16"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
@@ -34,6 +38,7 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 androidx-ui-text-google-fonts = { module = "androidx.compose.ui:ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+logging = { module = "com.diamondedge:logging", version.ref = "logging" }
 navigation-compose = {module = "org.jetbrains.androidx.navigation:navigation-compose" , version.ref = "compose_navigation"}
 
 room-runtime = {module = "androidx.room:room-runtime"  , version.ref = "room_version" }
@@ -43,6 +48,8 @@ sqlite-bundled = {module = "androidx.sqlite:sqlite-bundled"  , version.ref = "sq
 # utils
 arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
 arrow-fx-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines", version.ref = "arrow" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "slf4jApi" }
 
 # di
 koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }

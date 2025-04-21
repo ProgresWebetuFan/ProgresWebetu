@@ -1,4 +1,4 @@
-package com.zako.webetu.navigation.presentation
+package com.zako.webetu.navigation.presentation.destinations
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController

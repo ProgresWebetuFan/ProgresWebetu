@@ -31,5 +31,7 @@
     <string name="no_default_user">No Default User</string>
     <string name="login_successful">Login Successful</string>
 
+    <string name="home">Home</string>
+
 
 </resources>

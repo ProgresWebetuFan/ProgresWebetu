@@ -70,6 +70,7 @@ kotlin {
             api(libs.arrow.core)
             implementation(libs.arrow.fx.coroutines)
             implementation(libs.kotlinx.serialization.json)
+            api(libs.logging)
 
             // di
             implementation(project.dependencies.platform(libs.koin.bom))
@@ -87,6 +88,9 @@ kotlin {
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            //utils
+            implementation(libs.slf4j.api)
+            implementation(libs.logback.classic)
         }
     }
 }
